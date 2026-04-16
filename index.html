@@ -1,528 +1,621 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="Мәди & Кәмилә — Үйлену тойына шақыру!">
-  <meta property="og:description" content="15.08.2026 — Сіздерді қуанышымызбен бөлісуге шақырамыз">
-  <meta property="og:image" content="https://zhamilovzamir.github.io/madi-kamila15.08/ossy.png">
-  <title>Мади & Камила</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --rose:    #e8607a;
-      --rose2:   #f4a0b0;
-      --peach:   #f9c8a0;
-      --sage:    #7cb98a;
-      --sage2:   #aedbb8;
-      --cream:   #fff8f2;
-      --white:   #ffffff;
-      --text:    #5a3040;
-      --text2:   #8a5060;
-      --gold:    #d4a060;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body {
-      font-family:'Montserrat',sans-serif;
-      font-weight:300;
-      background:var(--cream);
-      color:var(--text);
-      overflow-x:hidden;
-    }
 
-    #ornaCanvas {
-      position:fixed; inset:0;
-      width:100%; height:100%;
-      pointer-events:none; z-index:0;
-    }
 
-    /* MODAL */
-    #modal {
-      position:fixed; inset:0; z-index:9999;
-      background:linear-gradient(160deg,#fff0f5 0%,#fce8d8 50%,#edf7ee 100%);
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      gap:28px;
-      transition:opacity 0.8s ease;
-    }
-    #modal.hidden { opacity:0; pointer-events:none; }
-    .modal-flowers { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    .modal-photo {
-      width:min(280px,72vw); height:min(360px,55vh);
-      object-fit:cover;
-      border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;
-      border:4px solid white;
-      box-shadow:0 12px 48px rgba(232,96,122,0.25), 0 0 0 8px rgba(244,160,176,0.2);
-      position:relative; z-index:2;
-    }
-    .modal-photo-ph {
-      width:min(280px,72vw); height:min(360px,55vh);
-      border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;
-      border:4px solid white;
-      background:linear-gradient(135deg,#f9d0dc,#fce8d8);
-      display:flex; align-items:center; justify-content:center;
-      font-size:12px; letter-spacing:2px; color:var(--rose);
-      text-align:center; position:relative; z-index:2;
-    }
-    .modal-title {
-      font-family:'Great Vibes',cursive;
-      font-size:clamp(36px,10vw,56px);
-      color:var(--rose); text-align:center;
-      position:relative; z-index:2;
-      text-shadow:0 2px 20px rgba(232,96,122,0.2);
-    }
-    .open-btn {
-      font-family:'Montserrat',sans-serif;
-      font-size:12px; font-weight:600;
-      letter-spacing:4px; text-transform:uppercase;
-      color:white;
-      background:linear-gradient(135deg,var(--rose),#c04060);
-      border:none; padding:16px 48px; border-radius:50px;
-      cursor:pointer; position:relative; z-index:2;
-      box-shadow:0 8px 32px rgba(232,96,122,0.4);
-      transition:transform 0.3s, box-shadow 0.3s;
-    }
-    .open-btn:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(232,96,122,0.5); }
 
-    /* MAIN */
-    main { position:relative; z-index:1; }
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Мәди-Кәмилә үйлену тойына шақыру!">
+    <meta property="og:description" content="15.08.2026">
+    <meta property="og:image" content="https://zhamilovzamir.github.io/madi-kamilao/ossy.jpg" >
 
-    /* HERO */
-    #hero {
-      min-height:100vh; display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      padding:80px 24px 60px; text-align:center;
-      background:linear-gradient(180deg,rgba(255,240,245,0.9) 0%,rgba(252,232,216,0.7) 100%);
-      position:relative;
-    }
-    .eyebrow {
-      font-size:10px; font-weight:600; letter-spacing:6px;
-      text-transform:uppercase; color:var(--rose2); margin-bottom:24px;
-      opacity:0; animation:fadeUp 1s ease 0.4s forwards;
-    }
-    .hero-names {
-      font-family:'Great Vibes',cursive;
-      font-size:clamp(60px,16vw,110px);
-      color:var(--rose); line-height:1;
-      text-shadow:0 4px 30px rgba(232,96,122,0.2);
-      opacity:0; animation:fadeUp 1s ease 0.7s forwards;
-    }
-    .hero-amp {
-      display:block; font-family:'Great Vibes',cursive;
-      font-size:clamp(30px,7vw,52px); color:var(--sage); margin:4px 0;
-    }
-    .hero-date {
-      margin-top:32px; font-size:clamp(13px,3.5vw,17px);
-      font-weight:600; letter-spacing:8px; color:var(--gold);
-      opacity:0; animation:fadeUp 1s ease 1s forwards;
-    }
-    .hero-city {
-      font-size:12px; letter-spacing:4px; color:var(--text2); margin-top:8px;
-      opacity:0; animation:fadeUp 1s ease 1.2s forwards;
-    }
-    .petal-divider {
-      display:flex; align-items:center; justify-content:center;
-      gap:12px; margin:36px auto 0;
-      opacity:0; animation:fadeUp 1s ease 1.4s forwards;
-    }
-    .petal-divider span { font-size:20px; }
-    .petal-line { width:60px; height:1px; background:linear-gradient(to right,transparent,var(--rose2)); }
-    .petal-line.r { background:linear-gradient(to left,transparent,var(--rose2)); }
 
-    /* PHOTO */
-    .photo-wrap { display:flex; justify-content:center; padding:20px 24px 60px; }
-    .main-photo {
-      width:100%; max-width:420px; aspect-ratio:3/4; object-fit:cover;
-      border-radius:200px 200px 160px 160px;
-      border:6px solid white;
-      box-shadow:0 20px 60px rgba(232,96,122,0.2), 0 0 0 12px rgba(244,160,176,0.15);
-    }
-    .main-photo-ph {
-      width:100%; max-width:420px; aspect-ratio:3/4;
-      border-radius:200px 200px 160px 160px;
-      background:linear-gradient(135deg,#fce8f0,#fce8d8);
-      border:6px solid white;
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      gap:12px; color:var(--rose2); font-size:12px; letter-spacing:2px;
+<link rel="stylesheet"  href="css.css">
+
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мәди-Кәмилә үйлену тойына шақыру!</title> 
+
+
+
+
+
+<style>
+    
+
+
+@media screen and (max-width: 1280px) {div.contentblock {width: 1200px;} } 
+@media screen and (max-width: 1140px) { div.contentblock {width: 1024px;} } 
+@media screen and (max-width: 992px) { div.contentblock {width: 970px;} } 
+
+
+
+
+
+
+.element-animation{ 
+    top: 0px; 
+    opacity: 0; 
+    position: relative; 
+} 
+.element-animation.element-show{ 
+position: relative; 
+top: 20px; 
+opacity: 1; 
+transition-duration: 1.4s; 
+}
+
+
+
+
+
+
+
+
+
+.conteiner{
+
+  background-size: 100%;
+overflow: hide;
+width: 100%;
+   height: 50%;
+
+}
+.countdown-container {
+    margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 0.7rem;
+      font-weight: 200;
+      line-height: 1.0;
+      -webkit-text-size-adjust: 80%;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      display: flex;
+      justify-content: center;
+     background-color: none;
+}
+
+
+.countdown-item {
+      position: relative;
+      min-width: 40px;
+      margin-left: 10px;
+      margin-right: 10px;
+      padding-bottom: 10px;
+}
+
+    .countdown:not(:last-child)::after {
+      content: ':';
+      position: absolute;
+      right: -15px;
+
     }
 
-    /* SECTIONS */
-    .section { padding:56px 24px; max-width:560px; margin:0 auto; text-align:center; }
-    .section-label { font-size:10px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:var(--rose2); margin-bottom:20px; }
-    .section-title { font-family:'Great Vibes',cursive; font-size:clamp(32px,8vw,48px); color:var(--rose); margin-bottom:20px; }
-    .section-text { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(16px,4vw,20px); line-height:1.8; color:var(--text2); }
 
-    .bg-petal {
-      background:linear-gradient(135deg,rgba(244,160,176,0.12) 0%,rgba(249,200,160,0.08) 100%);
-      border-top:1px solid rgba(232,96,122,0.1);
-      border-bottom:1px solid rgba(232,96,122,0.1);
-    }
-    .bg-sage { background:linear-gradient(135deg,rgba(174,219,184,0.15) 0%,rgba(249,200,160,0.08) 100%); }
+.countdown-item span {
+       display: block;
+    font-size: 32px;
+    margin-bottom: 1px;
+    color: #3F3F3F;
+    border-radius: 5px;
+    padding: 5px;
+    animation: pulse 1s ease infinite alternate;
+}
 
-    /* HOSTS */
-    .hosts-names { font-family:'Great Vibes',cursive; font-size:clamp(34px,9vw,52px); color:var(--text); line-height:1.3; }
 
-    /* COUNTDOWN */
-    .countdown-grid { display:flex; justify-content:center; gap:8px; margin-top:28px; flex-wrap:wrap; }
-    .cd-item {
-      background:white; border-radius:16px; padding:18px 12px 12px;
-      min-width:72px;
-      box-shadow:0 4px 20px rgba(232,96,122,0.12);
-    }
-    .cd-num { font-family:'Playfair Display',serif; font-size:clamp(32px,9vw,48px); color:var(--rose); display:block; line-height:1; }
-    .cd-label { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); margin-top:6px; display:block; }
-    .cd-sep { font-family:'Great Vibes',cursive; font-size:40px; color:var(--rose2); align-self:center; padding-bottom:16px; }
 
-    /* BUTTONS */
-    .map-btn {
-      display:inline-flex; align-items:center; gap:10px;
-      font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
-      color:white; text-decoration:none;
-      background:linear-gradient(135deg,var(--sage),#5aaa6a);
-      padding:15px 36px; border-radius:50px; margin-top:24px;
-      box-shadow:0 8px 28px rgba(124,185,138,0.4);
-      transition:transform 0.3s, box-shadow 0.3s;
-    }
-    .map-btn:hover { transform:translateY(-2px); }
-    .tg-btn {
-      display:inline-flex; align-items:center; gap:10px;
-      font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
-      color:white; text-decoration:none;
-      background:linear-gradient(135deg,#3aa9d8,#1e7faa);
-      padding:15px 36px; border-radius:50px; margin-top:24px;
-      box-shadow:0 8px 28px rgba(58,169,216,0.4);
-      transition:transform 0.3s;
-    }
-    .tg-btn:hover { transform:translateY(-2px); }
 
-    /* RSVP */
-    .rsvp-wrap { max-width:440px; margin:28px auto 0; }
-    .radio-card {
-      display:flex; align-items:center; gap:14px; cursor:pointer;
-      padding:14px 20px; border-radius:14px;
-      border:2px solid rgba(232,96,122,0.15);
-      margin-bottom:10px; background:white;
-      transition:all 0.3s; font-size:14px; color:var(--text2); text-align:left;
-    }
-    .radio-card:hover { border-color:var(--rose2); color:var(--text); }
-    .radio-card input { display:none; }
-    .radio-dot {
-      width:18px; height:18px; border-radius:50%;
-      border:2px solid var(--rose2); flex-shrink:0;
-      transition:all 0.3s; background:transparent;
-      display:flex; align-items:center; justify-content:center;
-    }
-    .radio-dot::after {
-      content:''; width:8px; height:8px; border-radius:50%;
-      background:var(--rose); opacity:0; transition:opacity 0.3s;
-    }
-    .radio-card:has(input:checked) { border-color:var(--rose); background:rgba(232,96,122,0.05); color:var(--text); }
-    .radio-card:has(input:checked) .radio-dot { border-color:var(--rose); }
-    .radio-card:has(input:checked) .radio-dot::after { opacity:1; }
 
-    .name-input {
-      width:100%; background:white;
-      border:2px solid rgba(232,96,122,0.15); border-radius:14px;
-      color:var(--text); font-family:'Montserrat',sans-serif;
-      font-size:14px; font-weight:300; padding:14px 20px;
-      outline:none; transition:border-color 0.3s; margin-top:6px;
-    }
-    .name-input::placeholder { color:var(--rose2); }
-    .name-input:focus { border-color:var(--rose); }
 
-    .submit-btn {
-      width:100%;
-      background:linear-gradient(135deg,var(--rose),#c04060);
-      border:none; color:white;
-      font-family:'Montserrat',sans-serif;
-      font-size:12px; font-weight:600;
-      letter-spacing:4px; text-transform:uppercase;
-      padding:18px; border-radius:50px; cursor:pointer;
-      margin-top:16px;
-      box-shadow:0 8px 28px rgba(232,96,122,0.35);
-      transition:transform 0.3s, box-shadow 0.3s;
-    }
-    .submit-btn:hover { transform:translateY(-2px); }
 
-    .success-msg {
-      display:none; font-family:'Great Vibes',cursive;
-      font-size:32px; color:var(--rose); text-align:center; padding:32px;
-    }
+      .form-inner {
+   position: relative;
+}
 
-    /* FOOTER */
-    footer {
-      text-align:center; padding:60px 24px 80px;
-      background:linear-gradient(180deg,transparent,rgba(244,160,176,0.12));
-    }
-    .footer-names { font-family:'Great Vibes',cursive; font-size:clamp(40px,10vw,60px); color:var(--rose); }
-    footer small { display:block; font-size:10px; letter-spacing:5px; color:var(--rose2); margin-top:12px; }
+}
+.form-inner label {
+   display: block;
+   padding-left: 15px;
+   font-family: 'Roboto', sans-serif;
+   color: rgba(255, 255, 255, .6);
+   text-transform: uppercase;
+   font-size: 15px;
+padding: 0 15px;
+   margin: 10px 0 15px;
+}
 
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(24px); }
-      to   { opacity:1; transform:translateY(0); }
+.btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+
+  transition: transform 0.3s ease;
+}
+
+/* Стили для кнопки с эффектом при нажатии */
+.btn {
+  transform: scale(1.1); /* Увеличиваем кнопку при активации */
+}
+
+
+
+.form-inner textarea {
+   width: 80%;
+   text-align: center;
+   margin-top: 5px;
+ 
+   border-radius: 5px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 300;
+    background-color: #ffffff;
+    border-color: #1d3f57  0.5px;
+    letter-spacing: 0.11em;
+ height: 30px;
+   font-family: 'Roboto', sans-serif;
+  
+}
+
+.form-inner input[type="submit"] {
+    background: linear-gradient(to top left, #68805a 0%, #68805a 100%);
+       width: 80%;
+height: 30PX;
+text-align: center;
+    border: 0;
+    border-bottom: 2px  #aaa;
+       border-radius: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #FFFAF8  ;
+    letter-spacing: 0.11em;
+   font-family: 'Roboto', sans-serif;
+  padding: 0 15px;
+   margin: 10px 0 15px;
+
+}
+.radio-group{
+  text-align: left;
+  width: 80%;
+  font-size: 20px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #585856;
+  color: rgba(88, 88, 86, .7);
+}
+
+
+
+
+body {
+    background-color:#fffffa ;
+}
+
+</style>
+
+
+
+
+ <style>
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
     }
-    @keyframes float {
-      0%,100% { transform:translateY(0px) rotate(var(--r,0deg)); }
-      50%      { transform:translateY(-18px) rotate(var(--r,0deg)); }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.9s ease, transform 0.9s ease; }
-    .reveal.visible { opacity:1; transform:translateY(0); }
   </style>
+
+
+
+
+
+ <style>
+        /* Стили для модального окна */
+        .modal {
+            display: block; /* Модальное окно отображается сразу */
+            position: fixed;
+            z-index: 9999; /* Модальное окно поверх всех элементов */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Затемнённый фон */
+        }
+        .modal-content {
+            background-color: #fffffa;
+            margin: 30% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center;
+        }
+        .kk{
+          width: 100%;
+          height: 100%;
+     }
+          button {
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #fffffa;
+            border-radius: 5px;
+            border-color: #000000;
+        }
+        /* Отключение скроллинга страницы */
+        body.modal-open {
+            overflow: hidden;
+        }
+    </style>
+
+
 </head>
 <body>
 
-<canvas id="ornaCanvas"></canvas>
 
-<!-- MODAL -->
-<div id="modal">
-  <div class="modal-flowers" id="modalFlowers"></div>
-  <p style="font-family:'Great Vibes',cursive;font-size:clamp(20px,5vw,28px);color:var(--rose2);letter-spacing:2px;position:relative;z-index:2;">
-    Үйлену тойына шақыру
-  </p>
-  <img src="ossy.png" alt="Мәди & Кәмилә" class="modal-photo"
-    onerror="this.style.display='none';document.getElementById('modal-ph').style.display='flex'">
-  <div id="modal-ph" class="modal-photo-ph" style="display:none">ФОТО<br>ЖҮКТЕҢІЗ</div>
-  <p class="modal-title">Мади & Камила</p>
-  <button class="open-btn" onclick="openSite()">🌸 Шақыртуды ашу</button>
+
+
+<div class="fade-in" id="content">
+<img src="ossy.jpg" style="width: 100%; height: 100%;" loading="eager">
 </div>
 
-<!-- MAIN -->
-<main id="site" style="display:none">
 
-  <section id="hero">
-    <p class="eyebrow">✦ Үйлену тойына шақыру ✦</p>
-    <h1 class="hero-names">
-      Мәди
-      <span class="hero-amp">&amp;</span>
-      Кәмилә
-    </h1>
-    <p class="hero-date">15 · 08 · 2026</p>
-    <p class="hero-city">Семей қаласы</p>
-    <div class="petal-divider">
-      <div class="petal-line"></div>
-      <span>🌸</span><span>💍</span><span>🌸</span>
-      <div class="petal-line r"></div>
-    </div>
-  </section>
+<center>
+<div class="element-animation"> 
+<img src="hmjm.gif" style="width: 20%;">
 
-  <div class="photo-wrap reveal">
-    <img src="ossy.png" alt="Мәди & Кәмилә" class="main-photo"
-      onerror="this.style.display='none';document.getElementById('main-ph').style.display='flex'">
-    <div id="main-ph" class="main-photo-ph" style="display:none">
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-        <rect x="3" y="3" width="18" height="18" rx="4"/>
-        <circle cx="8.5" cy="8.5" r="1.5"/>
-        <polyline points="21 15 16 10 5 21"/>
-      </svg>
-      СУРЕТТІ ЖҮКТЕҢІЗ
-    </div>
+</div></center>
+
+
+
+
+
+<center>
+<div class="element-animation" style="position: relative; width: 100%;">
+
+  <!-- КАРТИНКА -->
+  <img src="frame.png" style="width: 100%; display: block;">
+
+  <!-- ФОРМА ПОВЕРХ -->
+  <div style="
+    position: absolute;
+    top: 800px;   /* двигаешь под свою картинку */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 10px;
+  ">
+
+    <form class="transparent" method="post" id="form">
+      <div class="form-inner">
+        
+        <div class="radio-group">
+          <input type="radio" id="q1_yes1" name="name" value="Иә барамын/барамыз" required>
+          <label for="q1_yes1">Иә барамын/барамыз</label><br>
+
+          <input type="radio" id="q1_yes2" name="name" value="Жұбайыммен барамын" required>
+          <label for="q1_yes2">Жұбайыммен барамын</label><br>
+
+          <input type="radio" id="q1_no" name="name" value="Бара алмаймын" required>
+          <label for="q1_no">Бара алмаймын</label>
+        </div>
+
+        <textarea required
+          name="message"
+          maxlength="100"
+          id="message"
+          cols="30"
+          rows="4"
+          placeholder="Есіміңізді жазыңыз">
+        </textarea>
+
+        <input type="submit" value="Жіберу" style="color:white;" class="btn">
+
+      </div>
+    </form>
+
   </div>
 
-  <section class="section reveal">
-    <p class="section-label">✦ Шақыру ✦</p>
-    <h2 class="section-title">Сіздерді күтеміз!</h2>
-    <p class="section-text">Біздің қуанышымызды сізбен бөлісуге<br>шын жүректен шақырамыз 💐</p>
-  </section>
+</div>
+</center>
 
-  <section class="section bg-petal reveal" style="max-width:100%;padding:56px 24px;">
-    <div style="max-width:480px;margin:0 auto;">
-      <p class="section-label">✦ Той иелері ✦</p>
-      <p class="hosts-names">
-        Талғат<br>
-        <span style="font-family:'Great Vibes',cursive;font-size:0.7em;color:var(--sage);">&amp;</span><br>
-        Шынар
-      </p>
+
+
+
+
+<center>
+<div class="element-animation"> 
+<img src="2.jpg" style="width: 100%; margin-top: 0px;">
+</div></center>
+
+
+
+
+
+<center>
+<div class="element-animation" style="background: url('bc.jpg') center/cover no-repeat;"> 
+<img src="3.jpg" style="width: 100%;margin-top: 0px; margin-bottom: 0px;"  >
+    <center>
+<div class="countdown-container" style="margin-top:10px;">
+    <div class="countdown-item" style="margin-bottom: 30px;">
+        <span id="days"></span>
+        <span style="font-size: 13px;text-align: center;">күн</span>
+    </div><h2 style="margin-top:3px; size: 30px;">:</h2>
+    <div class="countdown-item">
+        <span id="hours"></span>
+        <span style="font-size: 13px;text-align: center;">сағат</span>
+    </div><h2 style="margin-top:3px; size: 30px;">:</h2>
+    <div class="countdown-item">
+        <span id="minutes"></span>
+        <span style="font-size: 13px;text-align: center;text-align: center;">минут</span>
+    </div><h2 style="margin-top:3px; size: 30px;">:</h2>
+    <div class="countdown-item">
+        <span id="seconds"></span>
+        <span style="font-size: 13px;text-align: center;">секунд</span>
     </div>
-  </section>
+</div>
 
-  <section class="section reveal" style="max-width:100%;padding:56px 24px;">
-    <div style="max-width:480px;margin:0 auto;">
-      <p class="section-label">✦ Тойға дейін ✦</p>
-      <div class="countdown-grid">
-        <div class="cd-item"><span class="cd-num" id="days">00</span><span class="cd-label">күн</span></div>
-        <span class="cd-sep">·</span>
-        <div class="cd-item"><span class="cd-num" id="hours">00</span><span class="cd-label">сағат</span></div>
-        <span class="cd-sep">·</span>
-        <div class="cd-item"><span class="cd-num" id="minutes">00</span><span class="cd-label">минут</span></div>
-        <span class="cd-sep">·</span>
-        <div class="cd-item"><span class="cd-num" id="seconds">00</span><span class="cd-label">секунд</span></div>
-      </div>
+</center>
+
+</div></center>
+
+    
+<center>
+<div class="element-animation"> 
+<a href="https://2gis.kz/semey/geo/70000001051886713"><img src="4.jpg" style="width: 100%; margin-top: 0px;margin-bottom: 0px;"></a>
+</div></center>
+
+
+
+<center>
+<div class="element-animation"> <a href="https://t.me/+iOUDieytv9E1ODUy">
+<img src="tgc.jpg" style="width: 100%;margin-top: 0px; margin-bottom: 0px;"  ></a>
+
+</div></center>
+
+
+
+
+
+
+
+
+
+<center style="margin-top: 40px;">
+<form class="transparent"method="post" id="form">
+<div class="form-inner">
+  
+ <div class="radio-group" required>
+                    <input type="radio" id="question1_yes" name="name" value="Иә барамын/барамыз" required>
+                    <label for="question1_yes" >Иә барамын/барамыз</label><br>
+                    <input type="radio" id="question1_yes" name="name" value="Жұбайыммен барамын" required>
+                    <label for="question1_yes" >Жұбайыммен барамын</label><br>
+                    <input type="radio" id="question1_no" name="name" value="Бара алмаймын" required>
+                    <label for="question1_no">Бара алмаймын</label>
+                </div>
+    <textarea required
+          name="message"
+          maxlength="100"
+          id="message"
+          cols="30"
+          rows="4"
+          placeholder="Есіміңізді жазыңыз"
+         
+        ></textarea>
+<input  type="submit" value="Жіберу" style="color:white;" class="btn">
+</div>
+</form></center>
+
+
+
+
+<!-- Модальное окно -->
+<div id="musicModal" class="modal">
+    <div class="modal-content">
+        <img src="ossy.jpg" class="kk">
+        <button id="playMusic" style="color: black;">Шақыртуды ашу</button>
     </div>
-  </section>
+</div>
 
-  <section class="section bg-sage reveal" style="max-width:100%;padding:56px 24px;">
-    <div style="max-width:480px;margin:0 auto;">
-      <p class="section-label">✦ Мекенжай ✦</p>
-      <h2 class="section-title"> "Шұбартау" мейрамханасы<br>Ақжол көшесі 2/2</h2>
-      <p class="section-text">Семей қаласы</p>
-      <a href="https://2gis.kz/semey/geo/70000001051886713" target="_blank" class="map-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-        </svg>
-        Картадан қарау
-      </a>
-    </div>
-  </section>
-
-  <section class="section reveal">
-    <p class="section-label">✦ Телеграм канал ✦</p>
-    <h2 class="section-title">Фото & Видео</h2>
-    <p class="section-text">Тойдың қызықты сәттерін,<br>фото, видеоларын телеграм<br>каналдан көре аласыздар 🎉</p>
-    <a href="https://t.me/+iOUDieytv9E1ODUy" target="_blank" class="tg-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.46.7-.92.44l-2.56-1.88-1.24 1.2c-.14.14-.26.26-.52.26l.18-2.6 4.72-4.26c.2-.18-.04-.28-.32-.1L7.68 14.6l-2.52-.78c-.54-.18-.56-.54.12-.8l9.84-3.8c.46-.16.86.1.52.58z"/>
-      </svg>
-      Каналға өту
-    </a>
-  </section>
-
-  <section class="section bg-petal reveal" style="max-width:100%;padding:56px 24px;">
-    <div style="max-width:440px;margin:0 auto;">
-      <p class="section-label">✦ Жауабыңыз ✦</p>
-      <h2 class="section-title">Келесіз бе?</h2>
-      <div id="success-msg" class="success-msg">Жауабыңызға рахмет! 🌸<br>Сізді күтеміз!</div>
-      <form id="rsvp-form" class="rsvp-wrap">
-        <label class="radio-card">
-          <input type="radio" name="answer" value="Иә, барамын">
-          <span class="radio-dot"></span>🌷 Иә, барамын
-        </label>
-        <label class="radio-card">
-          <input type="radio" name="answer" value="Жұбайыммен барамыз">
-          <span class="radio-dot"></span>💑 Жұбайыммен барамыз
-        </label>
-        <label class="radio-card">
-          <input type="radio" name="answer" value="Бара алмаймын">
-          <span class="radio-dot"></span>🙏 Бара алмаймын
-        </label>
-        <input type="text" class="name-input" id="guest-name" placeholder="Есіміңізді жазыңыз" maxlength="80" required>
-        <button type="submit" class="submit-btn">💌 Жіберу</button>
-      </form>
-    </div>
-  </section>
-
-  <footer>
-    <p class="footer-names">Мади & Камила</p>
-    <small>✦ 15 · 08 · 2026 ✦</small>
-  </footer>
-</main>
-
-<audio id="music" loop>
-  <source src="Kuandyk-Rahym-Uilenem.mp3" type="audio/mpeg">
+<audio id="backgroundMusic" loop>
+    <source src="Kuandyk-Rahym-Uilenem.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает воспроизведение музыки.
 </audio>
 
 <script>
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIZEl-apJlRgrzhNW_l3g4GKnIJNOA3agIRrNAob787dOVh4wXnkPaSFHvkUAs-Bvy/exec";
+    // Получаем модальное окно, кнопку и аудио
+    var modal = document.getElementById("musicModal");
+    var playButton = document.getElementById("playMusic");
+    var audio = document.getElementById("backgroundMusic");
 
-  /* FLOATING ORNAMENTS */
-  const canvas = document.getElementById('ornaCanvas');
-  const ctx = canvas.getContext('2d');
-  const FLOWERS = ['🌸','🌺','🌼','🌷','🍃','✿','❀','💮'];
-  let particles = [];
+    // При нажатии на кнопку включаем музыку и закрываем модальное окно
+    playButton.onclick = function() {
+        audio.play();
+        closeModal();
+    };
 
-  function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = Math.max(document.body.scrollHeight, window.innerHeight);
-  }
-
-  function createParticles() {
-    particles = [];
-    const count = Math.floor(window.innerWidth / 26);
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        emoji: FLOWERS[Math.floor(Math.random() * FLOWERS.length)],
-        size: 14 + Math.random() * 22,
-        angle: Math.random() * Math.PI * 2,
-        rotSpeed: (Math.random() - 0.5) * 0.018,
-        floatAmp: 8 + Math.random() * 16,
-        floatSpeed: 0.003 + Math.random() * 0.007,
-        floatOffset: Math.random() * Math.PI * 2,
-        opacity: 0.12 + Math.random() * 0.16,
-      });
+    // Функция для закрытия модального окна и разблокировки сайта
+    function closeModal() {
+        modal.style.display = "none";  // Скрываем модальное окно
+        document.body.classList.remove("modal-open"); // Включаем прокрутку
     }
-  }
-
-  let t = 0;
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    t++;
-    particles.forEach(p => {
-      p.angle += p.rotSpeed;
-      const floatY = p.y + Math.sin(t * p.floatSpeed + p.floatOffset) * p.floatAmp;
-      ctx.save();
-      ctx.globalAlpha = p.opacity;
-      ctx.translate(p.x, floatY);
-      ctx.rotate(p.angle);
-      ctx.font = `${p.size}px serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(p.emoji, 0, 0);
-      ctx.restore();
-    });
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', () => { resize(); createParticles(); });
-  resize(); createParticles(); draw();
-
-  /* MODAL MINI FLOWERS */
-  const mf = document.getElementById('modalFlowers');
-  for (let i = 0; i < 16; i++) {
-    const el = document.createElement('div');
-    const r = (Math.random()*40-20).toFixed(1);
-    el.style.cssText = `position:absolute;font-size:${18+Math.random()*28}px;left:${Math.random()*100}%;top:${Math.random()*100}%;opacity:${(0.15+Math.random()*0.2).toFixed(2)};animation:float ${3+Math.random()*3}s ease-in-out ${Math.random()*2}s infinite;--r:${r}deg;transform:rotate(${r}deg);`;
-    el.textContent = FLOWERS[Math.floor(Math.random()*FLOWERS.length)];
-    mf.appendChild(el);
-  }
-
-  /* OPEN SITE */
-  function openSite() {
-    document.getElementById('modal').classList.add('hidden');
-    document.getElementById('site').style.display = 'block';
-    document.getElementById('music').play().catch(()=>{});
-    setTimeout(() => { resize(); createParticles(); }, 200);
-    setTimeout(() => { document.getElementById('modal').style.display='none'; }, 900);
-  }
-
-  /* COUNTDOWN */
-  function tick() {
-    const diff = new Date("August 15, 2026 17:00:00").getTime() - Date.now();
-    if (diff <= 0) { ['days','hours','minutes','seconds'].forEach(id=>document.getElementById(id).textContent='00'); return; }
-    document.getElementById('days').textContent    = String(Math.floor(diff/86400000)).padStart(2,'0');
-    document.getElementById('hours').textContent   = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
-    document.getElementById('minutes').textContent = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
-    document.getElementById('seconds').textContent = String(Math.floor(diff%60000/1000)).padStart(2,'0');
-  }
-  setInterval(tick, 1000); tick();
-
-  /* SCROLL REVEAL */
-  const ro = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); ro.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-
-  /* RSVP */
-  document.getElementById('rsvp-form').addEventListener('submit', e => {
-    e.preventDefault();
-    const answer = document.querySelector('[name="answer"]:checked');
-    const name = document.getElementById('guest-name').value.trim();
-    if (!answer || !name) { alert('Барлық өрісті толтырыңыз'); return; }
-    fetch(SCRIPT_URL, {
-      method:'POST',
-      headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
-      mode:'no-cors',
-      body:`name=${encodeURIComponent(answer.value)}&message=${encodeURIComponent(name)}`
-    }).catch(()=>{});
-    document.getElementById('rsvp-form').style.display='none';
-    document.getElementById('success-msg').style.display='block';
-  });
 </script>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      });
+
+      var elements = document.querySelectorAll(".fade-in");
+      elements.forEach(function(element) {
+        observer.observe(element);
+      });
+    });
+  </script>
+
+
+<script>
+    
+
+    const URL_APP = "https://script.google.com/macros/s/AKfycbzIZEl-apJlRgrzhNW_l3g4GKnIJNOA3agIRrNAob787dOVh4wXnkPaSFHvkUAs-Bvy/exec";
+
+const form = document.querySelector("#form");
+
+form.action = URL_APP;
+
+function isFilled(details) {
+  const {name, message } = details;
+  if (!name || !message) return false;
+  return true;
+}
+
+form.addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+
+  const name = document.querySelector("[name=name]:checked");
+  const message = document.querySelector("[name=message]");
+
+  let details = {
+    name: name ? name.value : '',
+    message: message.value.trim(),
+  };
+
+
+  let formBody = [];
+  for (let property in details) {
+    let encodedKey = encodeURIComponent(property);
+    let encodedValue = encodeURIComponent(details[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
+  }
+  formBody = formBody.join("&");
+
+ name.value = '';
+  message.value = '';
+  alert('Жауабыңызға рахмет!');
+
+  // Деректерді серверге жіберу
+  fetch(URL_APP, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+    },
+    mode: "no-cors",
+    body: formBody,
+  }).catch((err) => {
+    console.error('Error:', err);
+    alert("Ошибка!");
+  }).finally(() => {
+    submitButton.disabled = false; // Жіберу батырмасын қайта қосу
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     function onEntry(entry) { 
+      entry.forEach(change => { 
+        if (change.isIntersecting) { 
+         change.target.classList.add('element-show'); 
+         
+        } 
+      }); 
+    } 
+        let options = { 
+      threshold: [0.5] }; 
+    let observer = new IntersectionObserver(onEntry, options); 
+    let elements = document.querySelectorAll('.element-animation'); 
+     
+    for (let elm of elements) { 
+      observer.observe(elm); 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+    function updateCountdown() {
+        const endDate = new Date("August 15, 2026 17:00:00").getTime();
+        const now = new Date().getTime();
+        const distance = endDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+
+        if (distance < 0) {
+            clearInterval(timerInterval);
+            document.getElementById("days").innerText = "00";
+            document.getElementById("hours").innerText = "00";
+            document.getElementById("minutes").innerText = "00";
+            document.getElementById("seconds").innerText = "00";
+        }
+    }
+
+    const timerInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+});
+
+
+
+</script>
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https: //fonts.googleapis.com/css2?family= Piazzolla :wght@100 & display=swap" rel="stylesheet">
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" async></script>
 </body>
 </html>
