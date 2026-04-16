@@ -277,54 +277,136 @@ body {
 
 <center>
 <div class="element-animation" style="position: relative; width: 100%;">
-
   <!-- КАРТИНКА -->
   <img src="frame.png" style="width: 100%; display: block;">
-
   <!-- ФОРМА ПОВЕРХ -->
   <div style="
     position: absolute;
-    top: 800px;   /* двигаешь под свою картинку */
+    top: 5400px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0,0,0,0.6);
-    padding: 20px;
-    border-radius: 10px;
+    width: 85%;
+    max-width: 360px;
+    background: rgba(255, 248, 238, 0.92);
+    backdrop-filter: blur(8px);
+    padding: 28px 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(200, 160, 100, 0.3);
+    box-shadow: 0 8px 32px rgba(160, 100, 60, 0.15);
   ">
+    <p style="
+      font-family: 'Great Vibes', cursive;
+      font-size: 28px;
+      color: #c47a50;
+      text-align: center;
+      margin-bottom: 18px;
+    ">Жауабыңыз</p>
 
-    <form class="transparent" method="post" id="form">
-      <div class="form-inner">
-        
-        <div class="radio-group">
-          <input type="radio" id="q1_yes1" name="name" value="Иә барамын/барамыз" required>
-          <label for="q1_yes1">Иә барамын/барамыз</label><br>
+    <form method="post" id="form">
 
-          <input type="radio" id="q1_yes2" name="name" value="Жұбайыммен барамын" required>
-          <label for="q1_yes2">Жұбайыммен барамын</label><br>
+      <!-- РАДИО КНОПКИ -->
+      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
 
-          <input type="radio" id="q1_no" name="name" value="Бара алмаймын" required>
-          <label for="q1_no">Бара алмаймын</label>
-        </div>
+        <label style="
+          display:flex; align-items:center; gap:12px;
+          background: #fff8ee;
+          border: 1.5px solid rgba(196,122,80,0.2);
+          border-radius: 12px;
+          padding: 12px 16px;
+          cursor: pointer;
+          font-size: 14px;
+          color: #7a4030;
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 400;
+          transition: border-color 0.3s;
+        ">
+          <input type="radio" name="name" value="Иә барамын/барамыз" required
+            style="accent-color: #c47a50; width:17px; height:17px; flex-shrink:0;">
+          🌷 Иә барамын / барамыз
+        </label>
 
-        <textarea required
-          name="message"
-          maxlength="100"
-          id="message"
-          cols="30"
-          rows="4"
-          placeholder="Есіміңізді жазыңыз">
-        </textarea>
+        <label style="
+          display:flex; align-items:center; gap:12px;
+          background: #fff8ee;
+          border: 1.5px solid rgba(196,122,80,0.2);
+          border-radius: 12px;
+          padding: 12px 16px;
+          cursor: pointer;
+          font-size: 14px;
+          color: #7a4030;
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 400;
+        ">
+          <input type="radio" name="name" value="Жұбайыммен барамын" required
+            style="accent-color: #c47a50; width:17px; height:17px; flex-shrink:0;">
+          💑 Жұбайыммен барамын
+        </label>
 
-        <input type="submit" value="Жіберу" style="color:white;" class="btn">
+        <label style="
+          display:flex; align-items:center; gap:12px;
+          background: #fff8ee;
+          border: 1.5px solid rgba(196,122,80,0.2);
+          border-radius: 12px;
+          padding: 12px 16px;
+          cursor: pointer;
+          font-size: 14px;
+          color: #7a4030;
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 400;
+        ">
+          <input type="radio" name="name" value="Бара алмаймын" required
+            style="accent-color: #c47a50; width:17px; height:17px; flex-shrink:0;">
+          🙏 Бара алмаймын
+        </label>
 
       </div>
+
+      <!-- ИМЯ -->
+      <input
+        type="text"
+        name="message"
+        id="message"
+        maxlength="100"
+        placeholder="Есіміңізді жазыңыз"
+        required
+        style="
+          width: 100%;
+          background: #fff8ee;
+          border: 1.5px solid rgba(196,122,80,0.25);
+          border-radius: 12px;
+          padding: 13px 16px;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 14px;
+          color: #5a3020;
+          outline: none;
+          margin-bottom: 14px;
+          box-sizing: border-box;
+        "
+      >
+
+      <!-- КНОПКА -->
+      <button type="submit" style="
+        width: 100%;
+        background: linear-gradient(135deg, #c47a50, #a05030);
+        border: none;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        padding: 15px;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(160,80,40,0.3);
+      ">
+        💌 Жіберу
+      </button>
+
     </form>
-
   </div>
-
 </div>
 </center>
-
 
 
 
